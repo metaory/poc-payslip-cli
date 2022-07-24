@@ -2,6 +2,7 @@ const { prompt } = require('enquirer')
 
 const dayjs = require('dayjs')
 dayjs.extend(require('dayjs/plugin/localeData'))
+// dayjs.extend(require('dayjs/plugin/customParseFormat'))
 
 const percentInput = (name, min = 0, max = 1) => prompt({
   type: 'numeral',
@@ -47,6 +48,8 @@ const stringInput = (name) => prompt({
 })
 
 const dateInput = async (name) => {
+  const year = new Date().getFullYear()
+
   const { month } = await prompt({
     type: 'select',
     name: 'month',
@@ -54,12 +57,15 @@ const dateInput = async (name) => {
     limit: 7,
     choices: dayjs.months()
   })
+
   const { day } = await prompt({
     type: 'select',
     name: 'day',
     message: `enter ${name} day?`,
     limit: 7,
-    choices: Array.from({ length: dayjs(`${month}-01`, "MMMM-DD").daysInMonth() })
+    choices: Array.from({
+      length: dayjs(`${month}-01-${year}`, 'MMMM-DD-YYYY').daysInMonth()
+    })
       .map((_, i) => ({ name: i + 1, value: i + 1 }))
   })
   return { month, day }
