@@ -1,14 +1,7 @@
-import * as prompt from 'enquirer'
-// const { prompt } = require('enquirer')
-console.log('prompt', prompt)
+const { prompt } = require('enquirer')
 
-import dayjs from 'dayjs'
-// const dayjs = require('dayjs')
-console.log('dayjs', dayjs)
-
-import localeData from 'dayjs/plugin/localeData'
-dayjs.extend(localeData)
-// dayjs.extend(require('dayjs/plugin/localeData'))
+const dayjs = require('dayjs')
+dayjs.extend(require('dayjs/plugin/localeData'))
 
 // const numberInput = (name, min, max, format) => prompt({
 //   type: 'numeral',
@@ -24,7 +17,7 @@ dayjs.extend(localeData)
 //     }
 //   }
 // })
-export const percentInput = (name, min = 0, max = 1) => prompt({
+const percentInput = (name, min = 0, max = 1) => prompt({
   type: 'numeral',
   name,
   message: `enter ${name}`,
@@ -44,7 +37,7 @@ export const percentInput = (name, min = 0, max = 1) => prompt({
 const formatCurrency = (n, currency = 'USD') => n.toLocaleString('en-US',
   { style: 'currency', currency })
 
-export const currencyInput = (name, { min, max }) => prompt({
+const currencyInput = (name, { min, max }) => prompt({
   type: 'numeral',
   name,
   message: `enter ${name}`,
@@ -60,8 +53,9 @@ export const currencyInput = (name, { min, max }) => prompt({
   }
 })
 
-export const stringInput = (name) => prompt({ type: 'input', name, message: `enter ${name}` })
-export const dateInput = async (name) => {
+
+const stringInput = (name) => prompt({ type: 'input', name, message: `enter ${name}` })
+const dateInput = async (name) => {
   const { month } = await prompt({
     type: 'select',
     name: 'month',
@@ -74,10 +68,10 @@ export const dateInput = async (name) => {
     name: 'day',
     message: `enter ${name} day?`,
     limit: 7,
-    choices: Array.from({ length: dayjs(`${month}-01`, 'MMMM-DD').daysInMonth() })
+    choices: Array.from({ length: dayjs(`${month}-01`, "MMMM-DD").daysInMonth() })
       .map((_, i) => ({ name: i + 1, value: i + 1 }))
   })
   return { month, day }
 }
 
-// module.exports = { percentInput, currencyInput, stringInput, dateInput }
+module.exports = { percentInput, currencyInput, stringInput, dateInput }

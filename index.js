@@ -1,10 +1,12 @@
 const { log, error, clear } = console
 clear()
 
-// const { percentInput, currencyInput, stringInput, dateInput } = require('./prompts')
-import { percentInput, currencyInput, stringInput, dateInput } from './prompts.js'
-
-// let percentInput, currencyInput, stringInput, dateInput
+const {
+  percentInput,
+  currencyInput,
+  stringInput,
+  dateInput
+} = require('./prompts')
 
 async function main () {
   const { rate } = await percentInput('rate')
