@@ -6,7 +6,9 @@ import dayjs from 'dayjs'
 // const dayjs = require('dayjs')
 console.log('dayjs', dayjs)
 
-dayjs.extend(require('dayjs/plugin/localeData'))
+import localeData from 'dayjs/plugin/localeData'
+dayjs.extend(localeData)
+// dayjs.extend(require('dayjs/plugin/localeData'))
 
 // const numberInput = (name, min, max, format) => prompt({
 //   type: 'numeral',
