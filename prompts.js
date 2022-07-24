@@ -3,29 +3,15 @@ const { prompt } = require('enquirer')
 const dayjs = require('dayjs')
 dayjs.extend(require('dayjs/plugin/localeData'))
 
-// const numberInput = (name, min, max, format) => prompt({
-//   type: 'numeral',
-//   name,
-//   message: `enter ${name}`,
-//   format,
-//   validate: (val, state) => {
-//     if (val >= min && val <= max) {
-//       return true
-//     } else {
-//       state.value = ''
-//       return `rate must be between ${min}-${max}`
-//     }
-//   }
-// })
 const percentInput = (name, min = 0, max = 1) => prompt({
   type: 'numeral',
   name,
   message: `enter ${name}`,
   format: (val) => val.toLocaleString('en-US', { style: 'percent' }),
   validate: (val, state) => {
-    val = Number(`.${val}`)
-    if (val >= min && val <= max) {
-      state.value = val
+    const _val = Number(`.${val < 10 ? String(val).padStart(2, 0) : val}`)
+    if (_val >= min && _val <= max) {
+      state.value = _val
       return true
     } else {
       state.value = ''
@@ -37,7 +23,7 @@ const percentInput = (name, min = 0, max = 1) => prompt({
 const formatCurrency = (n, currency = 'USD') => n.toLocaleString('en-US',
   { style: 'currency', currency })
 
-const currencyInput = (name, { min, max }) => prompt({
+const currencyInput = (name, min, max) => prompt({
   type: 'numeral',
   name,
   message: `enter ${name}`,
@@ -53,8 +39,13 @@ const currencyInput = (name, { min, max }) => prompt({
   }
 })
 
+const stringInput = (name) => prompt({
+  type: 'input',
+  name,
+  message: `enter ${name}`,
+  validate: (val) => !!val || `${name} cant be empty!`
+})
 
-const stringInput = (name) => prompt({ type: 'input', name, message: `enter ${name}` })
 const dateInput = async (name) => {
   const { month } = await prompt({
     type: 'select',
@@ -74,4 +65,9 @@ const dateInput = async (name) => {
   return { month, day }
 }
 
-module.exports = { percentInput, currencyInput, stringInput, dateInput }
+module.exports = {
+  percentInput,
+  currencyInput,
+  stringInput,
+  dateInput
+}

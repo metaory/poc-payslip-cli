@@ -1,5 +1,6 @@
-const { log, error, clear } = console
+const { log, error, table, clear } = console
 clear()
+log`================================`
 
 const {
   percentInput,
@@ -8,20 +9,54 @@ const {
   dateInput
 } = require('./prompts')
 
-async function main () {
-  const { rate } = await percentInput('rate')
-  const { salary } = await currencyInput('salary',
-    { min: 1_000, max: 9_000_000 }
-  )
+const calculate = require('./calculate')
+
+const print = (obj) => {
+  table({ obj })
+
+  log('-----------------')
+
+  log(Object.keys(obj).join(', '))
+  log(Object.values(obj).join(', '))
+}
+// print({ fname: 'bar', lname: 'zelda', from: 'start date' })
+
+async function main() {
   const { firstname } = await stringInput('firstname')
   const { lastname } = await stringInput('lastname')
+
+  const { rate } = await percentInput('rate')
+  const { salary } = await currencyInput('salary', 1_000, 9_000_000)
 
   const { day: startDay, month: startMonth } = await dateInput('start')
   const { day: endDay, month: endMonth } = await dateInput('end')
 
-  log({ firstname, lastname, startMonth, startDay, endMonth, endDay, salary, rate })
+  const outcome = calculate({
+    firstname,
+    lastname,
+    startMonth,
+    startDay,
+    endMonth,
+    endDay,
+    salary,
+    rate
+  })
+
+  print(outcome)
 }
 
 main()
   .then(log)
   .catch(error)
+
+/*
+*
+
+first-name, last-name, annual-salary, super-rate (%), payment-start-date
+Andrew, Smith, 60_050, 9%,   01 March – 31 March
+Claire, Wong, 120_000, 10% , 01 March – 31 March
+
+name , pay-period          , gross , tax  , net  , super
+A S  , 01 March – 31 March , 5004  , 922  , 4082 , 450
+C W  , 01 March – 31 March , 10000 , 2696 , 7304 , 1000
+*/
