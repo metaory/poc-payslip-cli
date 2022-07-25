@@ -44,15 +44,3 @@ async function main() {
 main()
   .then(log)
   .catch(error)
-
-/*
-*
-
-first-name, last-name, annual-salary, super-rate (%), payment-start-date
-Andrew, Smith, 60_050, 9%,   01 March – 31 March
-Claire, Wong, 120_000, 10% , 01 March – 31 March
-
-name , pay-period          , gross , tax  , net  , super
-A S  , 01 March – 31 March , 5004  , 922  , 4082 , 450
-C W  , 01 March – 31 March , 10000 , 2696 , 7304 , 1000
-*/

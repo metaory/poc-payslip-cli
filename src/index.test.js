@@ -20,7 +20,7 @@ test('60_050 case', () => {
 
 console.log('-------------')
 
-test('60_050 case', () => {
+test('120_000 case', () => {
   const outcome = calculate({
     firstname: 'foo',
     lastname: 'bar',
@@ -33,8 +33,17 @@ test('60_050 case', () => {
   })
   console.table({ outcome })
   expect(outcome.gross).toBe(10000)
-  // expect(outcome.tax).toBe(2696)
-  // expect(outcome.net).toBe(7304)
+  expect(outcome.tax).toBe(2670) // XXX
+  expect(outcome.net).toBe(7330) // XXX
   expect(outcome.superAmount).toBe(1000)
 })
 
+/**************************************************************************
+ first-name, last-name, annual-salary, super-rate (%), payment-start-date *
+ Andrew, Smith, 60_050, 9%,   01 March – 31 March                         *
+ Claire, Wong, 120_000, 10% , 01 March – 31 March                         *
+ .........................................................................*
+ name , pay-period          , gross , tax  , net  , super                 *
+ A S  , 01 March – 31 March , 5004  , 922  , 4082 , 450                   *
+ C W  , 01 March – 31 March , 10000 , 2670 , 7330 , 1000                  *
+**************************************************************************/
