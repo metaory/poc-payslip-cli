@@ -1,6 +1,5 @@
 const { log, error, table, clear } = console
 clear()
-log`================================`
 
 const {
   percentInput,
@@ -12,14 +11,11 @@ const {
 const calculate = require('./calculate')
 
 const print = (obj) => {
-  table({ obj })
-
-  log('-----------------')
+  if (process.argv[2] === '--table') table({ obj })
 
   log(Object.keys(obj).join(', '))
   log(Object.values(obj).join(', '))
 }
-// print({ fname: 'bar', lname: 'zelda', from: 'start date' })
 
 async function main() {
   const { firstname } = await stringInput('firstname')

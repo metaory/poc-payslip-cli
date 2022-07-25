@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "test": "node index.test"
+    "est": "node index.test",
+    "test": "jest"
   },
   "license": "MIT",
   "dependencies": {
@@ -16,6 +17,7 @@
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-n": "^15.0.0",
-    "eslint-plugin-promise": "^6.0.0"
+    "eslint-plugin-promise": "^6.0.0",
+    "jest": "^28.1.3"
   }
 }

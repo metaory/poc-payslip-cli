@@ -7,7 +7,7 @@ const getDiff = ({ startDay, startMonth, endDay, endMonth }) => {
 
   return {
     days: endDate.diff(startDate, 'day'),
-    months: endDate.diff(startDate, 'month')
+    months: endDate.diff(startDate, 'month') || 1
   }
 }
 
@@ -55,15 +55,13 @@ function calculate(state) {
     `${formatDay(endDay)} ${endMonth} `
 
   const { days, months } = getDiff({ startDay, startMonth, endDay, endMonth })
-  console.log({days,months})
 
-  const gross = Math.floor(salary / 12)
+  const gross = Math.floor((salary / 12 / 30) * days)
   const [[bracketStart], { base, each }] = pickBracket(salary)
-  const tax = Math.ceil((((salary - bracketStart) * each) + base) / 12)
+  const tax = Math.ceil(((((salary - bracketStart) * each) + base) / 12 / 30) * days)
   const net = Math.ceil(gross - tax)
   const superAmount = Math.floor(gross * rate)
 
-  // console.table({ calc: { salary, rate, bracketStart, base, each }})
   return { fullname, payPeriod, gross, tax, net, superAmount }
 }
 
