@@ -52,11 +52,11 @@ module.exports = function(state) {
     `${formatDay(startDay)} ${startMonth}` + ' - ' +
     `${formatDay(endDay)} ${endMonth} `
 
-  const { days, months } = getDiff({ startDay, startMonth, endDay, endMonth })
+  const { days } = getDiff({ startDay, startMonth, endDay, endMonth })
 
   const gross = Math.floor((salary / 12 / 30) * days)
   const [[bracketStart], { base, each }] = pickBracket(salary)
-  // const tax = Math.round(((((salary - bracketStart) * each) + base) / 12 / 30) * days)
+
   const tax = Math.round((base + (salary - bracketStart) * each) / 12 / 30 * days)
   const net = Math.round(gross - tax)
   const superAmount = Math.round(gross * rate)
