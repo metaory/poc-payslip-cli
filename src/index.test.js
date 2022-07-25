@@ -1,7 +1,7 @@
 const calculate = require('./calculate')
 
 test('60_050 case', () => {
-  const outcome = calculate({
+  const input = {
     firstname: 'foo',
     lastname: 'bar',
     startMonth: 'March',
@@ -10,7 +10,9 @@ test('60_050 case', () => {
     endDay: 31,
     salary: 60_050,
     rate: 0.09
-  })
+  }
+  console.table({ input })
+  const outcome = calculate(input)
   console.table({ outcome })
   expect(outcome.gross).toBe(5004)
   expect(outcome.tax).toBe(922)
@@ -21,7 +23,7 @@ test('60_050 case', () => {
 console.log('-------------')
 
 test('120_000 case', () => {
-  const outcome = calculate({
+  const input = {
     firstname: 'foo',
     lastname: 'bar',
     startMonth: 'March',
@@ -30,7 +32,9 @@ test('120_000 case', () => {
     endDay: 31,
     salary: 120_000,
     rate: 0.10
-  })
+  }
+  console.table({ input })
+  const outcome = calculate(input)
   console.table({ outcome })
   expect(outcome.gross).toBe(10000)
   expect(outcome.tax).toBe(2669) // XXX
