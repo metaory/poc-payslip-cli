@@ -4,6 +4,10 @@ Employee payslip for a flexible pay cycle (demo)
 
 ### **dev**
 
+<p align="center">
+  <img src="./2022-07-25-151110_1233x874_scrot.png">
+</p>
+
 `npm start`
 
 Runs the CLI application.

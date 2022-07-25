@@ -37,7 +37,7 @@ const pickBracket = (salary) => {
 // console.log('^^^^^^^^^^^^^^^^^')
 
 function calculate(state) {
-  console.table({ state })
+  if (process.argv[2] === '--table') console.table({ state })
   const {
     firstname,
     lastname,
