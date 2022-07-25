@@ -20,15 +20,15 @@ const pickBracket = (salary) => {
   brackets.set([18_201, 37_000], { base: 0, each: 0.19 })
   brackets.set([37_001, 87_000], { base: 3_572, each: 0.325 })
   brackets.set([87_001, 180_000], { base: 19_822, each: 0.37 })
-  brackets.set([180_001], { base: 54_232, each: 0.45 })
+  brackets.set([180_001, Infinity], { base: 54_232, each: 0.45 })
 
   return Array.from(brackets.entries()).reduce((acc, cur) => {
-    const [_bracket] = cur
-    const [start, end = Infinity] = _bracket
+    const [bracket] = cur
+    const [start, end] = bracket
 
     const match = salary > start && salary < end
 
-    if (match) acc = [[start, end], brackets.get(_bracket)]
+    if (match) acc = [bracket, brackets.get(bracket)]
     return acc
   })
 }
