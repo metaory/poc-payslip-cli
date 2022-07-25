@@ -24,7 +24,7 @@ const pickBracket = (salary) => {
 
   return Array.from(brackets.entries()).reduce((acc, cur) => {
     const [_bracket] = cur
-    const [start, end = 9_999_999] = _bracket
+    const [start, end = Infinity] = _bracket
 
     const match = salary > start && salary < end
 
