@@ -56,9 +56,10 @@ module.exports = function(state) {
 
   const gross = Math.floor((salary / 12 / 30) * days)
   const [[bracketStart], { base, each }] = pickBracket(salary)
-  const tax = Math.ceil(((((salary - bracketStart) * each) + base) / 12 / 30) * days)
-  const net = Math.ceil(gross - tax)
-  const superAmount = Math.floor(gross * rate)
+  // const tax = Math.round(((((salary - bracketStart) * each) + base) / 12 / 30) * days)
+  const tax = Math.round((base + (salary - bracketStart) * each) / 12 / 30 * days)
+  const net = Math.round(gross - tax)
+  const superAmount = Math.round(gross * rate)
 
   return { fullname, payPeriod, gross, tax, net, superAmount }
 }

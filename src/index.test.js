@@ -33,8 +33,8 @@ test('120_000 case', () => {
   })
   console.table({ outcome })
   expect(outcome.gross).toBe(10000)
-  expect(outcome.tax).toBe(2670) // XXX
-  expect(outcome.net).toBe(7330) // XXX
+  expect(outcome.tax).toBe(2669) // XXX
+  expect(outcome.net).toBe(7331) // XXX
   expect(outcome.superAmount).toBe(1000)
 })
 
