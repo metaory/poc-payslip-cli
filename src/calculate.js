@@ -32,12 +32,10 @@ const pickBracket = (salary) => {
     return acc
   })
 }
-// console.log(pickBracket(60_050))
-// console.log(pickBracket(188_050))
-// console.log('^^^^^^^^^^^^^^^^^')
 
-function calculate(state) {
+module.exports = function(state) {
   if (process.argv[2] === '--table') console.table({ state })
+
   const {
     firstname,
     lastname,
@@ -64,5 +62,3 @@ function calculate(state) {
 
   return { fullname, payPeriod, gross, tax, net, superAmount }
 }
-
-module.exports = calculate
