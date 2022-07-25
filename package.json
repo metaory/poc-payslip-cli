@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index",
-    "est": "node index.test",
+    "start": "node src",
+    "est": "node src/index.test",
     "test": "jest"
   },
   "license": "MIT",

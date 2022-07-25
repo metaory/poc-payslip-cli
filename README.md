@@ -2,8 +2,6 @@
 Employee payslip for a flexible pay cycle (demo)
 ## Usage
 
-`parser --input <path> --output <path>`
-
 ### **dev**
 
 `npm start`
